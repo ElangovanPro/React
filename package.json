@@ -1,0 +1,25 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "react app",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElangovanPro/React.git"
+  },
+  "author": "Elango",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElangovanPro/React/issues"
+  },
+  "homepage": "https://github.com/ElangovanPro/React#readme",
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}
