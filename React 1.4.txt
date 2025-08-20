@@ -1,0 +1,39 @@
+1.
+
+react.createElement("h1",{atrributtes},"children");
+
+
+2.
+
+jsx->babel->react.createElement()->js object->render->browser
+
+VDOM - virtual dom  (js object)--- js representation of HTML
+
+js code are executing by JS engine 
+
+how its rendering --react fiber algorithm (reconciliatation engine)
+
+rendering - 2 phases -
+
+1.render phase
+ - build work in progress(WIP) fiber tree
+ - diff b/t old VDOM vs New VDOM ===> diff algorthim
+ - collect effect lists (placement, update, delete)
+ - can be paused/resumed
+
+
+2.commit phase
+  - applying or executing the effect list(dom mutations, lifecycle)
+
+
+
+==> applying to real or autual dom >Browser UI
+
+
+
+
+
+
+over all flow
+
+jsx-> react create element-> js object -> fiber tree -> (rendering phase) ->commit phase apply to dom -> browser UI
