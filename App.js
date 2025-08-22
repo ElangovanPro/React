@@ -2,18 +2,33 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+//component composition- component inside component
+//react component == react element
 
-// const headingReactWay=React.createElement("h1",{id:"parent"},"Hello from react element way");
-const heading=(
-<div id="parent">
-<h1 id="text">hello world</h1>
-<h3>Welcome to the React World</h3>
-{100+200}
-<button onClick={()=>document.getElementById("text").innerHTML="Hello react"}>Clicking</button>
-</div>);
+const Title=()=>(<h1>Hello from title</h1>);
 
+const number=100;
+
+const element=<span>Welcome</span>;
+
+const Heading =()=>{
+    return (
+    <>
+    <Title/>
+    {element}
+    {100+300}
+    {number}
+    {console.log("hey hi")}
+    <h1>Hello world</h1>
+    <h2>Hello world</h2>
+    <h3>Hello world  {number}</h3>
+    <h4>Hello world</h4>
+    <h5>Hello world</h5>
+    <h6>Hello world</h6>
+    {Title()}
+    </>
+);
+}
 
 const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(heading);//its converts the js object or react element to the html format which browser understands(browser doesn't understand react direclty)
-console.log(heading);//object
-// console.log(headingReactWay);//object
+root.render(<Heading/>);
