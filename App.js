@@ -1,34 +1,23 @@
-
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Header from "./src/components/Header/Header";
+import Body from "./src/components/Body/Body";
+import Footer from "./src/components/Footer/Footer";
 
-//component composition- component inside component
-//react component == react element
+const AppLayout =()=>{
 
-const Title=()=>(<h1>Hello from title</h1>);
+const value1="Hello";
+const value2="World";
 
-const number=100;
-
-const element=<span>Welcome</span>;
-
-const Heading =()=>{
     return (
     <>
-    <Title/>
-    {element}
-    {100+300}
-    {number}
-    {console.log("hey hi")}
-    <h1>Hello world</h1>
-    <h2>Hello world</h2>
-    <h3>Hello world  {number}</h3>
-    <h4>Hello world</h4>
-    <h5>Hello world</h5>
-    <h6>Hello world</h6>
-    {Title()}
+    <Header arg1={value1} arg2={value2}  />
+    <Body arg1={value1} arg2={value2}/>
+    <Footer/>
     </>
 );
 }
 
+
 const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Heading/>);
+root.render(<AppLayout/>);
