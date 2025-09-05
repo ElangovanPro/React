@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import Header from "./src/components/Header/Header";
 import Body from "./src/components/Body/Body";
 import Footer from "./src/components/Footer/Footer";
+import { Age } from "./src/components/Age/Age";
 
 const AppLayout =()=>{
 
@@ -11,9 +12,10 @@ const value2="World";
 
     return (
     <>
-    <Header arg1={value1} arg2={value2}  />
+    {/* <Header arg1={value1} arg2={value2}  />
     <Body arg1={value1} arg2={value2}/>
-    <Footer/>
+    <Footer/> */}
+    <Age></Age>
     </>
 );
 }

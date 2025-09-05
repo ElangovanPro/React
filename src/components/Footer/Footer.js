@@ -7,12 +7,10 @@ export const footerLink="https://www.google.com";
 
 export const footerLink1="https://www.google.com";
 
-// let age=18;
-
 
 //external css
 const Footer=()=>{
-
+//whenver the state changes it will re-render the component
 const [age, setage]=useState(18);
 console.log(age);
 
@@ -22,7 +20,6 @@ console.log(age);
     <h1>{age}</h1>
      <button className='bodyButton' onClick={
         ()=>{
-        // age=20;
         setage(20);
     }
     }>Click me</button>
