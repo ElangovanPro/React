@@ -5,7 +5,7 @@ import Body from "./src/components/Body/Body";
 import Footer from "./src/components/Footer/Footer";
 import { Age } from "./src/components/Age/Age";
 import { Employee } from "./src/components/Employee/Employee";
-
+import { EmployeeProps } from "./src/components/Employee/types";
 const AppLayout =()=>{
    
 //   //spread operator - array

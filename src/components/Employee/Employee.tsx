@@ -1,3 +1,5 @@
+import { EmployeeProps } from "./types";
+
 // export const Employee=({name,age})=>{
 //     return (
 //     <>
@@ -50,7 +52,7 @@ export const Employee=({...rest}:EmployeeProps)=>{
     return (
     <>
     <h1>{rest.name}</h1>
-    {rest.name=333}
+    {/* {rest.name=333} */}
     <h1>{rest.name}</h1>
     <h1>{JSON.stringify(rest)}</h1>
     <h1>{rest.age}</h1>

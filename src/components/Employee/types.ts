@@ -1,4 +1,4 @@
-type EmployeeProps={
+export type EmployeeProps={
    name:string,
    age:number,
    city:string,
