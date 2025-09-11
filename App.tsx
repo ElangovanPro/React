@@ -53,8 +53,8 @@ const AppLayout =()=>{
     <Body/>
     <Footer/> */}
     <Age/>
-    <Employee name="sanjay" age={24} city="chennai" country="India"/>
-    <Employee {...emp1} />
+    {/* <Employee name="sanjay" age={24} city="chennai" country="India"/>
+    <Employee {...emp1} /> */}
     </>
 );
 }
