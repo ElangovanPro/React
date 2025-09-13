@@ -1,6 +1,6 @@
 
 import { URL1, URL2 } from "../constants/constants";
-
+import { useState } from "react";
 //on the fly destructing
 const Header=({arg1, arg2})=>{
 
@@ -38,30 +38,30 @@ const Header=({arg1, arg2})=>{
 // const numsCopy4=nums.filter(n=> typeof n==="string");
 // console.log(numsCopy4);
 
-const users=[{
-    name:"Elango"
-},{
-    name:"sanjay"
-}];
+// const users=[{
+//     name:"Elango"
+// },{
+//     name:"sanjay"
+// }];
 
-//n=>()
+// //n=>()
 
-console.log(users.map(n=>(n.name)));
+// console.log(users.map(n=>(n.name)));
 
-const newUsers=users.map(n=>({
-    ...n,
-    active:true
-}));
+// const newUsers=users.map(n=>({
+//     ...n,
+//     active:true
+// }));
 
-console.log(newUsers);
-console.log(users.map(n=>({
-    ...n,
-    active:true
-})));
-console.log(users.map(n=>({
-    ...users,
-    active:true
-})));
+// console.log(newUsers);
+// console.log(users.map(n=>({
+//     ...n,
+//     active:true
+// })));
+// console.log(users.map(n=>({
+//     ...users,
+//     active:true
+// })));
 
 //loose equality
 // console.log(8==8);//true
@@ -81,19 +81,25 @@ console.log(users.map(n=>({
 // console.log(typeof null);
 // console.log(typeof undefined);
 
+const [numbers,setnumbers]=useState([1,2,3,4,5]);
+
 //inline css
     return (
     <header>
-    <h1 style={
-        {
-            backgroundColor:"violet",
-            color:"red"
-        }
-    }>Header</h1>
-    {arg1+" "}
-    {arg2+" "}
-    {URL1+" "}
-    {URL2+" "}
+    <h1>Header</h1>
+    <h2>{numbers}</h2>
+
+    <button 
+    onClick={()=>{
+        const temp=numbers.filter(n=>n%2===0);
+        // const temp=numbers.map(n=>n*2);
+        console.log(temp);
+        setnumbers(temp);
+    }}
+    
+    >Click to double</button>
+
+
     </header>
     );
 }
