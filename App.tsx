@@ -49,10 +49,11 @@ const AppLayout =()=>{
 
     return (
     <>
+    <Header arg1={undefined} arg2={undefined} />
     {/* <Header />
     <Body/>
     <Footer/> */}
-    <Age/>
+    {/* <Age/> */}
     {/* <Employee name="sanjay" age={24} city="chennai" country="India"/>
     <Employee {...emp1} /> */}
     </>
