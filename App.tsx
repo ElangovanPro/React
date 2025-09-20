@@ -6,6 +6,8 @@ import Footer from "./src/components/Footer/Footer";
 import { Age } from "./src/components/Age/Age";
 import { Employee } from "./src/components/Employee/Employee";
 import { EmployeeProps } from "./src/components/Employee/types";
+import Card from "./src/components/cards/Card";
+
 const AppLayout =()=>{
    
 //   //spread operator - array
@@ -49,7 +51,8 @@ const AppLayout =()=>{
 
     return (
     <>
-    <Header arg1={undefined} arg2={undefined} />
+    {/* <Header arg1={undefined} arg2={undefined} /> */}
+   <Card/>
     {/* <Header />
     <Body/>
     <Footer/> */}
