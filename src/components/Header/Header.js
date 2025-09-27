@@ -1,107 +1,110 @@
 
 import { URL1, URL2 } from "../constants/constants";
 import { useState } from "react";
+import _ from "lodash";
 //on the fly destructing
-const Header=({arg1, arg2})=>{
-
-  // map, filter, reduce, forEach
-  //includes,sort,find,some
+const Header=()=>{
+//JS functions---- Lodash utility functions - part 1..Array, object, collections, strings
 
 
-  
-// function add(n)
-// {
-// return n*2;
-// }
+
+// 1- Chunk
+
+//[[1,2],[3,4],[5,6]]- ask -- splitting data into smaller groups
+// const arr=[1,2,3,4,5,6];
+// const result1=_.chunk(arr, 2);
+
+// console.log(result1);
 
 
-// const nums1=add(5);
-// console.log(nums1);
+// const products=["shirts","pant","shoes","watch","cap","tie"];
 
-//   const nums=[1,2,3,4,5,6,"8"];//2,4,6,8,10
+// const [page, setpage]=useState(0);
 
-  //when we need to use map==> when we need to transform
-//   const numsCopy=[nums.length];
-//   for(let i=0;i<nums.length;i++){
-//     numsCopy[i]=nums[i]*2;
-//   }
-//   console.log(numsCopy);
-// const numsCopy=nums.map(n=>n*2);//[2,4,6,8,10]
-// console.log(numsCopy);
+// const pages=_.chunk(products,2);
+// console.log(pages);
+// //pages[0]-shirts, pant
+// //pages[1]-shirts, pant
+// //pages[2]-shirts, pant
 
-// const numsCopy2=nums.map(e=>e/100);
-// console.log(numsCopy2);
+//2 - compact
 
-// const numsCopy3=nums.filter(n=>typeof n==="number" && n%2===0);
-// console.log(numsCopy3);
+//falsy values-> false, null, 0, "", undefined, NaN
+// const rawInput=["React", null, "","Elango",undefined, false,0,NaN];
+// const cleanedInput=_.compact(rawInput);
+// console.log(cleanedInput);
 
-// const numsCopy4=nums.filter(n=> typeof n==="string");
-// console.log(numsCopy4);
+// 3 - concat
 
-// const users=[{
-//     name:"Elango"
-// },{
-//     name:"sanjay"
-// }];
+// const rawInput1=["React","Elango"];
+// const rawInput2=["sanjay","jagadish"];
+// const cleanedInput=_.concat(rawInput1,rawInput2);
+// console.log(cleanedInput);
 
-// //n=>()
 
-// console.log(users.map(n=>(n.name)));
+// 4 - difference
+// const products=["shirts","pant","shoes","watch","cap","tie"];
 
-// const newUsers=users.map(n=>({
-//     ...n,
-//     active:true
-// }));
+// const cart=["shirts","shoes"];
 
-// console.log(newUsers);
-// console.log(users.map(n=>({
-//     ...n,
-//     active:true
-// })));
-// console.log(users.map(n=>({
-//     ...users,
-//     active:true
-// })));
+// const buy=_.difference(products,cart);
+// console.log(buy);
 
-//loose equality
-// console.log(8==8);//true
-// console.log(8=='8');//true
-// console.log(0==false);//true
-// console.log(null==undefined);//true
+//5-  drop
 
-// //strict equality
-// console.log(8===8);//true..number===number
-// console.log(8==='8');//false...number===string
-// console.log(0===false);//false...number===boolean
-// console.log(null===undefined);//false....null===undefined
+// const notification=["welcome","New message", "update availablr","Discount"];
 
-// console.log(typeof 5);
-// console.log(typeof "string");
-// console.log(typeof true);
-// console.log(typeof null);
-// console.log(typeof undefined);
+// const unread=_.drop(notification,2);
 
-const [numbers,setnumbers]=useState([1,2,3,4,5]);
+// console.log(unread);
 
-//inline css
+// 6 - uniq
+
+// const notification=["welcome","New message", "update","welcome"];
+
+// const unread=_.uniq(notification,2);
+
+// console.log(unread);
+
+//7 - intersection
+
+// const user1Friend1=["Alice","Bob","charlie"];
+// const user1Friend2=["david","Bob","charlie"];
+// const mutualFriends=_.intersection(user1Friend1,user1Friend2);
+// console.log(mutualFriends);
+
+//8--- flattern
+
+// const apiData=[1,[2,3],[4,[5,6,7,[8,[9]]]]];
+// const flatdata=_.flatten(apiData);
+// console.log(flatdata);
+
+//9----- fill
+// const emptySlots=_.fill(Array(3),"empty seats");
+// console.log(emptySlots);
+
     return (
-    <header>
-    <h1>Header</h1>
-    <h2>{numbers}</h2>
-
+    <>
+    {/* <h1>Page {page + 1}</h1>
+      {pages[page].map((item,i)=>{
+        console.log(item);
+       return <h1 key={i}>{item}</h1>
+      })}
     <button 
-    onClick={()=>{
-        const temp=numbers.filter(n=>n%2===0);
-        // const temp=numbers.map(n=>n*2);
-        console.log(temp);
-        setnumbers(temp);
-    }}
-    
-    >Click to double</button>
-
-
-    </header>
+    onClick={()=>
+      setpage((p)=>p+1 % pages.length)
+    }
+    >Click to Next Page</button> */}
+{/* 
+    <ul>
+      {cleanedInput.map((item,i)=>{
+        console.log(item);
+       return <h1 key={i}>{item}</h1>
+      })}
+    </ul> */}
+    </>
     );
+
 }
 
 export default Header;

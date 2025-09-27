@@ -1,13 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Header from "./src/components/Header/Header";
 import Body from "./src/components/Body/Body";
 import Footer from "./src/components/Footer/Footer";
 import { Age } from "./src/components/Age/Age";
 import { Employee } from "./src/components/Employee/Employee";
 import { EmployeeProps } from "./src/components/Employee/types";
 import Card from "./src/components/cards/Card";
-
+import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
+import React from "react";
+import Header from "./src/components/Header/Header";
 const AppLayout =()=>{
    
 //   //spread operator - array
@@ -51,8 +51,9 @@ const AppLayout =()=>{
 
     return (
     <>
+      <Header />
     {/* <Header arg1={undefined} arg2={undefined} /> */}
-   <Card/>
+   {/* <Card/> */}
     {/* <Header />
     <Body/>
     <Footer/> */}
@@ -63,5 +64,10 @@ const AppLayout =()=>{
 );
 }
 
-const root=ReactDOM.createRoot(document.getElementById("root")!);
-root.render(<AppLayout/>);
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
+  <React.StrictMode>
+   <AppLayout/>
+  </React.StrictMode>
+);
