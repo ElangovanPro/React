@@ -42,12 +42,12 @@ const AppLayout =()=>{
 
 
 //datatypes---number,boolean,string,undefined,null,unknown
- const emp1:EmployeeProps={
-    name:"sanjay",
-    age:24,
-    city:"chennai",
-    country:"India",
- }
+//  const emp1:EmployeeProps={
+//     name:"sanjay",
+//     age:24,
+//     city:"chennai",
+//     country:"India",
+//  }
 
     return (
     <>
