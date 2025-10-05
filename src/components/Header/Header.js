@@ -1,59 +1,78 @@
 
 import { URL1, URL2 } from "../constants/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import _ from "lodash";
 
 const Header=()=>{
-//JS functions---- Lodash utility functions - part 1..Array, object, collections, strings
+//useEffect - lets you to run the side effects,
+//side Effects-> anything outside rendering - API calls, event listeners,subscriptions, timers etc
+//    let count=0;
+const [count, setCount]=useState(0);
 
-//primitive values---Numbers, true, false, string
-   const [count,setcount]=useState(0);
-   
-   const [user,setuser]=useState({name:"Elango"});
+const [user, setUser]=useState([]);
 
-   const obj1={
-    id:1,
-    name:"elango",
-    address:{
-        city:"erode",
-        pincode:"638003"
-    }
-   };
-   const obj2={
-    id:1,
-    name:"elango",
-    address:{
-        city:"chennai",
-    }
-   };
+   const handleCount=()=>{
+     setCount(pre=>pre+1);
+    //   console.log(count);
+   }
 
-const merged=_.merge({},obj1,obj2);
-console.log("merged"+JSON.stringify(merged));//overwrites with keep original
+//       useEffect(()=>{ - it will run whenever the component re rendering
+//    })
 
-const assign=_.assign({},obj1,obj2);
-console.log("merged"+JSON.stringify(assign));//overwrites without keep original
+//    useEffect(()=>{  - it will run only once when first time component rendering
+    
+//    },[]),
+//    useEffect(()=>{
+//     console.log("useEffect rendering = "+count);
+//    },[count])// it will run based on the dependency, if dependecny chnages it will run
 
+// useEffect(()=>{
+
+//     fetch("https://dummyjson.com/users")
+//     .then(res=>res.json())
+//     .then(data=>console.log(data.users))
+//     .then(data=>setUser(data.users))
+//     .catch((err)=>console.log(err))
+// },[])
 
 
-//    console.log("App rendereding"+count);
+useEffect(()=>{
+
+    fetch("https://dummyjson.com/users")
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data.users)
+        return data;
+    })
+    .then(data=>setUser(data.users))
+    .catch((err)=>console.log(err))
+},[])
+
+// useEffect(()=>{
+//     fetch("https://dummyjson.com/users")
+//     .then(res=>res.json())
+//     .then(data=>{
+//         console.log(console.log(data.users));
+//         // console.log(data.users);
+//     setUser(data.users);
+//     })
+//     .catch((err)=>console.log(err))
+// },[])
+
+//    console.log("component rendering");
     return (
     <>
-     {count}
-     {user.name}
-     <button
-onClick={()=>{
-    setcount(pre=>pre+1);
-}}
-     >Click me for count</button>
-     {/* {    console.log(user)} */}
-          <button
-onClick={()=>{
-    user.name="jagadish"
-    // setuser({...user});//creating new object one of way
-    setuser(_.assign({},user,{name:"jagadish"}));//creating new object other one of way
-    console.log(user)
-}}
-     >Click me for user</button>
+    <h1>Hello world = {count}</h1>
+    {/* <h1>Hello world = {JSON.stringify(user)}</h1> */}
+     <h1>Hello world = 
+    {
+     user
+     .map((e)=>{
+      console.log(e.username)
+     })}</h1>
+    <button
+    onClick={handleCount}
+    >Click me to increase count</button>
     </>
     );
 }
