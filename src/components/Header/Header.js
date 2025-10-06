@@ -1,80 +1,102 @@
-
-import { URL1, URL2 } from "../constants/constants";
 import { useEffect, useState } from "react";
-import _ from "lodash";
-
-const Header=()=>{
-//useEffect - lets you to run the side effects,
-//side Effects-> anything outside rendering - API calls, event listeners,subscriptions, timers etc
-//    let count=0;
-const [count, setCount]=useState(0);
-
-const [user, setUser]=useState([]);
-
-   const handleCount=()=>{
-     setCount(pre=>pre+1);
-    //   console.log(count);
-   }
-
-//       useEffect(()=>{ - it will run whenever the component re rendering
-//    })
-
-//    useEffect(()=>{  - it will run only once when first time component rendering
-    
-//    },[]),
-//    useEffect(()=>{
-//     console.log("useEffect rendering = "+count);
-//    },[count])// it will run based on the dependency, if dependecny chnages it will run
-
-// useEffect(()=>{
-
-//     fetch("https://dummyjson.com/users")
-//     .then(res=>res.json())
-//     .then(data=>console.log(data.users))
-//     .then(data=>setUser(data.users))
-//     .catch((err)=>console.log(err))
-// },[])
+import axios from "axios";
+const Header = () => {
+ 
+  const [user,setuser]=useState([]);
+  const [loading, setloading]=useState(true);
+  const [error, seterror]=useState(null);
 
 
-useEffect(()=>{
+  // useEffect(()=>{
+  //   fetch("https://dummyjson.com/users")
+  //   .then((res)=>{
+  //     if(!res.ok){
+  //       throw new Error("network error");
+  //     }
+  //     return res.json();
+  //   })
+  //   .then(data=>{
+  //     setuser(data.users);
+  //     setInterval(()=>{
+  //       setloading(false);
+  //     }, 5000);
+  
+  //   })
+  //   .catch((err)=>{
+  //     seterror(err.message);
+  //     setloading(false);
+  //   })
+  // },[]);
+  
+  // useEffect(()=>{
+  //   const fetchUsers= async()=>{
+  //      try{
+  //       const res= await fetch("https://dummyjson.com/users");
+               
+  //      console.log(res);
+  //        if(!res.ok){
+  //       throw new Error("network error");
+  //     }
+  //       const data= await res.json();
+  //       setuser(data.users);
+  //     }
+  //      catch(err){
+  //     seterror(err.message);
+  //     setloading(false);
+  //      }
+  //      finally{
+  //             setInterval(()=>{
+  //       setloading(false);
+  //     }, 5000);
+  //      }
+  //   }
+  //   fetchUsers();
+  // },[]);
 
-    fetch("https://dummyjson.com/users")
-    .then(res=>res.json())
-    .then(data=>{
-        console.log(data.users)
-        return data;
-    })
-    .then(data=>setUser(data.users))
-    .catch((err)=>console.log(err))
-},[])
 
-// useEffect(()=>{
-//     fetch("https://dummyjson.com/users")
-//     .then(res=>res.json())
-//     .then(data=>{
-//         console.log(console.log(data.users));
-//         // console.log(data.users);
-//     setUser(data.users);
-//     })
-//     .catch((err)=>console.log(err))
-// },[])
+    useEffect(()=>{
+    const fetchUsers= async()=>{
+       try{
+        const res= await axios.get("https://dummyjson.com/users");
+console.log(res);
+        setuser(res.data.users);
+      }
+       catch(err){
+      seterror(err.message);
+      setloading(false);
+       }
+       finally{
+        setInterval(()=>{
+        setloading(false);
+      }, 5000);
+       }
+    }
+    fetchUsers();
+  },[]);
 
-//    console.log("component rendering");
-    return (
+ if(loading)
+ {
+return (<p>Loading......</p>);
+ }
+ if(error)
+ {
+  return (<p>Error : {error}</p>);
+ }
+
+  return (
     <>
-    <h1>Hello world = {count}</h1>
-    {/* <h1>Hello world = {JSON.stringify(user)}</h1> */}
-     <h1>Hello world = 
-    {
-     user
-     .map((e)=>{
-      console.log(e.username)
-     })}</h1>
-    <button
-    onClick={handleCount}
-    >Click me to increase count</button>
+    <h1>User List</h1>
+    <ul>
+      {user.map((user)=>(
+        <li key={user.id}>
+           {user.firstName}
+            {user.lastName}
+            ---{user.email}
+        </li>
+      ))}
+    </ul>
     </>
-    );
-}
+  );
+};
 
 export default Header;
