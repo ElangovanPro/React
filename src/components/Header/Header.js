@@ -1,75 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 const Header = () => {
-  const [userid,setuserid]=useState(1);
-  const [userorg,setuserorg]=useState([]);
-  const [user,setuser]=useState({});
-  const [loading, setloading]=useState(true);
-  const [error, seterror]=useState(null);
- 
+//useRef -keeps a mutable value that doesn't not cause re-render
+//when changed also used to direclty access DOM elemens
 
-    useEffect(()=>{
-    fetch("https://dummyjson.com/users")
-    .then((res)=>{
-      if(!res.ok){
-        throw new Error("network error");
-      }
-      return res.json();
-    })
-    .then(data=>{
-      setuserorg(data.users);
-      setInterval(()=>{
-        setloading(false);
-      }, 5000);
-  
-    })
-    .catch((err)=>{
-      seterror(err.message);
-      setloading(false);
-    })
-  },[]);
+const [count,setcount]=useState(0);
+const refcount=useRef(0);
 
+let normalcount=0;
 
-  useEffect(()=>{
-    fetch(`https://dummyjson.com/users/${userid}`)
-    .then((res)=>{
-      if(!res.ok){
-        throw new Error("network error");
-      }
-      return res.json();
-    })
-    .then(data=>{
-      setuser(data);
-      setInterval(()=>{
-        setloading(false);
-      }, 5000);
-  
-    })
-    .catch((err)=>{
-      seterror(err.message);
-      setloading(false);
-    })
-  },[userid]);
-
+console.log("component re- rendering ");
 
   return (
     <>
-    <ul>
-        <li key={user.id}>
-           {user.firstName}
-            {user.lastName}
-            ---{user.email}
-        </li>
-    </ul>
-    <select onChange={(e)=>setuserid(e.target.value)}>
-      {
-        userorg.map((user)=>(
-           <option key={user.id} value={user.id}>
- user {user.id}
-      </option>
-        ))
-      }
-    </select>
+<h1>Count : {count}</h1>
+<button
+onClick={()=>{
+  setcount(pre=>pre+1);
+}}
+>Click me </button>
+
+
+<br/>
+<hr/>
+<h1>Count : { refcount.current}</h1>
+<button
+onClick={()=>{
+  refcount.current++;
+  console.log("ref count"+refcount.current);
+}}
+>Click me for ref count </button>
     </>
+    
   );
 };
 
