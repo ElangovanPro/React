@@ -3,32 +3,51 @@ const Header = () => {
 //useRef -keeps a mutable value that doesn't not cause re-render
 //when changed also used to direclty access DOM elemens
 
-const [count,setcount]=useState(0);
-const refcount=useRef(0);
+const [color,setcolor]=useState("blue");
+const boxRef=useRef(null);
+const firstRender=useRef(true);
 
-let normalcount=0;
+useEffect(()=>{
 
-console.log("component re- rendering ");
+console.log("firstRender "+firstRender.current);
+
+
+if(firstRender.current){
+firstRender.current = false;
+return;
+}
+
+console.log("useEfect rendering");
+
+boxRef.current.style.transition = "transform 2s";
+boxRef.current.style.transform = "scale(5)";
+boxRef.current.style.background = color;
+
+const timer=setTimeout(()=>{
+boxRef.current.style.transform = "scale(1)";
+},500)
+
+
+return ()=>clearTimeout(timer);
+},[color]);
+
+console.log("compoennt rendering");
 
   return (
     <>
-<h1>Count : {count}</h1>
-<button
-onClick={()=>{
-  setcount(pre=>pre+1);
-}}
->Click me </button>
+    <div>
+      <div ref={boxRef} style={{background:color}}>
+   Box
+      </div>
+  <br/>
+  <hr/>
+      <button onClick={()=>{
+        setcolor("red");
+      }}>
+        click me to change color
+      </button>
+    </div>
 
-
-<br/>
-<hr/>
-<h1>Count : { refcount.current}</h1>
-<button
-onClick={()=>{
-  refcount.current++;
-  console.log("ref count"+refcount.current);
-}}
->Click me for ref count </button>
     </>
     
   );
