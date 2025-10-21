@@ -1,53 +1,49 @@
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState,useRef, useMemo } from "react";
 const Header = () => {
-//useRef -keeps a mutable value that doesn't not cause re-render
-//when changed also used to direclty access DOM elemens
+//usememo - helps react remember the result of a calculation so its 
+//doesn't have to redo it every time your component re-renders
 
-const [color,setcolor]=useState("blue");
-const boxRef=useRef(null);
-const firstRender=useRef(true);
+const [user,setuser]=useState([]);
+const [search,setsearch]=useState("");
+
 
 useEffect(()=>{
-
-console.log("firstRender "+firstRender.current);
-
-
-if(firstRender.current){
-firstRender.current = false;
-return;
+async function fetchusers() {
+  const res=await fetch("https://dummyjson.com/users");
+  const data=await res.json();
+  setuser(data.users);
+  // console.log(data.users);
+   console.log("useEffect running...");
 }
+fetchusers();
+},[])
 
-console.log("useEfect rendering");
+const filterUsers = useMemo(()=>{
+return user.filter((user)=>{
+  console.log("filter logic running...");
+  return user.firstName.toLowerCase().includes(search.toLocaleLowerCase());
+})
+},[search])
 
-boxRef.current.style.transition = "transform 2s";
-boxRef.current.style.transform = "scale(5)";
-boxRef.current.style.background = color;
-
-const timer=setTimeout(()=>{
-boxRef.current.style.transform = "scale(1)";
-},500)
-
-
-return ()=>clearTimeout(timer);
-},[color]);
-
-console.log("compoennt rendering");
+// console.log("filterUsers"+JSON.stringify(filterUsers));
+console.log("component rendered");
 
   return (
     <>
-    <div>
-      <div ref={boxRef} style={{background:color}}>
-   Box
-      </div>
-  <br/>
-  <hr/>
-      <button onClick={()=>{
-        setcolor("red");
-      }}>
-        click me to change color
-      </button>
-    </div>
+<div>
 
+  <input
+type="text"
+placeholder="search..."
+value={search}
+onChange={(e)=>setsearch(e.target.value)}
+/>
+
+<ul>
+  {filterUsers.map((user)=> (<li key={user.id}>{user.firstName}</li>))}
+</ul>
+
+</div>
     </>
     
   );
