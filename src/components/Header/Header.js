@@ -3,49 +3,61 @@ const Header = () => {
 //usememo - helps react remember the result of a calculation so its 
 //doesn't have to redo it every time your component re-renders
 
-const [user,setuser]=useState([]);
-const [search,setsearch]=useState("");
+const [count, setcount]=useState(0);
+const [text, settext]=useState("");
 
-
-useEffect(()=>{
-async function fetchusers() {
-  const res=await fetch("https://dummyjson.com/users");
-  const data=await res.json();
-  setuser(data.users);
-  // console.log(data.users);
-   console.log("useEffect running...");
+const slowFunction=(c)=>{
+console.log("slow function is called starting");
+for(let i=0;i<1000000000;i++){
 }
-fetchusers();
-},[])
+console.log("slow function is called ending");
+return c*c;
+}
+//normal value
+// const result=slowFunction(count);
 
-const filterUsers = useMemo(()=>{
-return user.filter((user)=>{
-  console.log("filter logic running...");
-  return user.firstName.toLowerCase().includes(search.toLocaleLowerCase());
-})
-},[search])
+//usememo
+const result= useMemo(()=>{
+  console.log("from useMemo");
+return slowFunction(count);
+}, [count]);
 
-// console.log("filterUsers"+JSON.stringify(filterUsers));
-console.log("component rendered");
+// //achieving through useEffect
+// const [double, setdouble]=useState(0);
+
+// useEffect(()=>{
+//     console.log("from UseEffect");
+// setdouble(count*count);
+// }, [count]);
+
+console.log("result = "+result);
+console.log("component re- rendered");
 
   return (
     <>
-<div>
+    <h1>
+        Count :{count}
+    </h1>
+    <h2>Doubbled from usememo : {result}</h2>
+   {/* <h2>Doubbled from useEffect: {double}</h2> */}
+<button
+onClick={()=>{
+  setcount(count+1);
+}}
+>Click me</button>
+<br/>
+<br/>
+<br/>
+    <input 
+    placeholder="enter...."
+    value={text}
+    onChange={(e)=>settext(e.target.value)}
+    >
+    </input>
 
-  <input
-type="text"
-placeholder="search..."
-value={search}
-onChange={(e)=>setsearch(e.target.value)}
-/>
-
-<ul>
-  {filterUsers.map((user)=> (<li key={user.id}>{user.firstName}</li>))}
-</ul>
-
-</div>
+    <h1>Entered text is = {text}</h1>
     </>
-    
+
   );
 };
 
