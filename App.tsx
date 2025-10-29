@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import { createRoot } from 'react-dom/client';
 import React from "react";
 import Header from "./src/components/Header/Header";
+import { JsPrototypeExample } from "./src/components/JS/JsPrototypeExample";
 const AppLayout =()=>{
    
 //   //spread operator - array
@@ -51,7 +52,7 @@ const AppLayout =()=>{
 
     return (
     <>
-      <Header />
+      <JsPrototypeExample />
     {/* <Header arg1={undefined} arg2={undefined} /> */}
    {/* <Card/> */}
     {/* <Header />
