@@ -4,3 +4,11 @@ h3{
 body{
      background-color: lightblue;
 }
+nav{
+    padding: 5px;
+    
+    a{
+        padding: 5px;
+        text-decoration: none;
+    }
+}
